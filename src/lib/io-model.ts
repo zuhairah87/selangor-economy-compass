@@ -1,10 +1,11 @@
 import model from "@/data/io-model.json";
 import msicRaw from "@/data/msic.json";
 
-export type Msic = { code: string; desc: string; sector: number };
-export const MSIC: Msic[] = (msicRaw as [string, string, number][]).map(([code, desc, sector]) => ({
+export type Msic = { code: string; desc: string; descEn: string; sector: number };
+export const MSIC: Msic[] = (msicRaw as [string, string, number, string][]).map(([code, desc, sector, descEn]) => ({
   code,
   desc,
+  descEn,
   sector,
 }));
 
