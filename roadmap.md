@@ -1,5 +1,6 @@
 # Roadmap
-- [ ] Decode Excel model (Backend IO, S LINK, Input Calc, BMBI)
-- [ ] First dashboard view: GDP, imports, productivity, employment KPIs
-- [ ] Simulation input page (MSIC code → value) driving the dashboard
-- [ ] 119-industry ranking view
+- [x] Decode Excel model (Backend IO, S LINK, Input Calc, BMBI)
+- [x] First dashboard view: GDP, imports, productivity, employment KPIs
+- [x] Simulation → Input Calc → S LINK → 119-sector multipliers
+- [ ] Simulation screen: bilingual MSIC search, editable amounts, review before calculating
+- [x] 119-industry ranking view
