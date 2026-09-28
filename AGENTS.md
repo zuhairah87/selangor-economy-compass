@@ -8,3 +8,4 @@
 > Commits you push to the connected branch sync back to Lovable and show up in
 > the editor, so keep the branch in a working state.
 <!-- LOVABLE:END -->
+- IO model math lives in src/lib/io-model.ts using src/data/io-model.json (Leontief inverse + ratios exported from Excel Backend IO); runs client-side — no backend needed for the prototype.

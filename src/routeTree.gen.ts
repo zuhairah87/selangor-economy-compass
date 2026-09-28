@@ -10,33 +10,63 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as IndustriRouteImport } from './routes/industri'
+import { Route as KaedahRouteImport } from './routes/kaedah'
+import { Route as SimulasiRouteImport } from './routes/simulasi'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const IndustriRoute = IndustriRouteImport.update({
+  id: '/industri',
+  path: '/industri',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const KaedahRoute = KaedahRouteImport.update({
+  id: '/kaedah',
+  path: '/kaedah',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SimulasiRoute = SimulasiRouteImport.update({
+  id: '/simulasi',
+  path: '/simulasi',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/industri': typeof IndustriRoute
+  '/kaedah': typeof KaedahRoute
+  '/simulasi': typeof SimulasiRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/industri': typeof IndustriRoute
+  '/kaedah': typeof KaedahRoute
+  '/simulasi': typeof SimulasiRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/industri': typeof IndustriRoute
+  '/kaedah': typeof KaedahRoute
+  '/simulasi': typeof SimulasiRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths: '/' | '/industri' | '/kaedah' | '/simulasi'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to: '/' | '/industri' | '/kaedah' | '/simulasi'
+  id: '__root__' | '/' | '/industri' | '/kaedah' | '/simulasi'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  IndustriRoute: typeof IndustriRoute
+  KaedahRoute: typeof KaedahRoute
+  SimulasiRoute: typeof SimulasiRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -48,11 +78,35 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/industri': {
+      id: '/industri'
+      path: '/industri'
+      fullPath: '/industri'
+      preLoaderRoute: typeof IndustriRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/kaedah': {
+      id: '/kaedah'
+      path: '/kaedah'
+      fullPath: '/kaedah'
+      preLoaderRoute: typeof KaedahRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/simulasi': {
+      id: '/simulasi'
+      path: '/simulasi'
+      fullPath: '/simulasi'
+      preLoaderRoute: typeof SimulasiRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  IndustriRoute: IndustriRoute,
+  KaedahRoute: KaedahRoute,
+  SimulasiRoute: SimulasiRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
