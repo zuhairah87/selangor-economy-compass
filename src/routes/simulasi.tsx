@@ -1,4 +1,4 @@
-import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
+import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { useMemo, useState } from "react";
 import { useSimulation } from "@/lib/simulation-store";
 import { MSIC, SECTOR_NAMES, fmtNum } from "@/lib/io-model";
