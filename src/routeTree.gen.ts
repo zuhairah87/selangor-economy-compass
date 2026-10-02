@@ -10,13 +10,20 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as BandinganRouteImport } from './routes/bandingan'
 import { Route as IndustriRouteImport } from './routes/industri'
 import { Route as KaedahRouteImport } from './routes/kaedah'
+import { Route as SektorUtamaRouteImport } from './routes/sektor-utama'
 import { Route as SimulasiRouteImport } from './routes/simulasi'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const BandinganRoute = BandinganRouteImport.update({
+  id: '/bandingan',
+  path: '/bandingan',
   getParentRoute: () => rootRouteImport,
 } as any)
 const IndustriRoute = IndustriRouteImport.update({
@@ -29,6 +36,11 @@ const KaedahRoute = KaedahRouteImport.update({
   path: '/kaedah',
   getParentRoute: () => rootRouteImport,
 } as any)
+const SektorUtamaRoute = SektorUtamaRouteImport.update({
+  id: '/sektor-utama',
+  path: '/sektor-utama',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const SimulasiRoute = SimulasiRouteImport.update({
   id: '/simulasi',
   path: '/simulasi',
@@ -37,35 +49,52 @@ const SimulasiRoute = SimulasiRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/bandingan': typeof BandinganRoute
   '/industri': typeof IndustriRoute
   '/kaedah': typeof KaedahRoute
+  '/sektor-utama': typeof SektorUtamaRoute
   '/simulasi': typeof SimulasiRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/bandingan': typeof BandinganRoute
   '/industri': typeof IndustriRoute
   '/kaedah': typeof KaedahRoute
+  '/sektor-utama': typeof SektorUtamaRoute
   '/simulasi': typeof SimulasiRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/bandingan': typeof BandinganRoute
   '/industri': typeof IndustriRoute
   '/kaedah': typeof KaedahRoute
+  '/sektor-utama': typeof SektorUtamaRoute
   '/simulasi': typeof SimulasiRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/industri' | '/kaedah' | '/simulasi'
+  fullPaths:
+    '/' | '/bandingan' | '/industri' | '/kaedah' | '/sektor-utama' | '/simulasi'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/industri' | '/kaedah' | '/simulasi'
-  id: '__root__' | '/' | '/industri' | '/kaedah' | '/simulasi'
+  to:
+    '/' | '/bandingan' | '/industri' | '/kaedah' | '/sektor-utama' | '/simulasi'
+  id:
+    | '__root__'
+    | '/'
+    | '/bandingan'
+    | '/industri'
+    | '/kaedah'
+    | '/sektor-utama'
+    | '/simulasi'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  BandinganRoute: typeof BandinganRoute
   IndustriRoute: typeof IndustriRoute
   KaedahRoute: typeof KaedahRoute
+  SektorUtamaRoute: typeof SektorUtamaRoute
   SimulasiRoute: typeof SimulasiRoute
 }
 
@@ -76,6 +105,13 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/bandingan': {
+      id: '/bandingan'
+      path: '/bandingan'
+      fullPath: '/bandingan'
+      preLoaderRoute: typeof BandinganRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/industri': {
@@ -92,6 +128,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof KaedahRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/sektor-utama': {
+      id: '/sektor-utama'
+      path: '/sektor-utama'
+      fullPath: '/sektor-utama'
+      preLoaderRoute: typeof SektorUtamaRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/simulasi': {
       id: '/simulasi'
       path: '/simulasi'
@@ -104,8 +147,10 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  BandinganRoute: BandinganRoute,
   IndustriRoute: IndustriRoute,
   KaedahRoute: KaedahRoute,
+  SektorUtamaRoute: SektorUtamaRoute,
   SimulasiRoute: SimulasiRoute,
 }
 export const routeTree = rootRouteImport

@@ -4,7 +4,9 @@ import type { ReactNode } from "react";
 const nav = [
   { to: "/", label: "Papan Pemuka" },
   { to: "/simulasi", label: "Simulasi" },
+  { to: "/bandingan", label: "Bandingan" },
   { to: "/industri", label: "119 Industri" },
+  { to: "/sektor-utama", label: "Sektor Utama" },
   { to: "/kaedah", label: "Kaedah" },
 ] as const;
 

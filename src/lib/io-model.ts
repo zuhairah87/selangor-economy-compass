@@ -97,3 +97,41 @@ export function byMainSector(rows: SectorResult[]) {
 export const fmtRm = (v: number) =>
   v.toLocaleString("ms-MY", { maximumFractionDigits: v < 100 ? 2 : 0 });
 export const fmtNum = (v: number, d = 0) => v.toLocaleString("ms-MY", { maximumFractionDigits: d });
+
+/** Input Calc for one scenario: MSIC entries → 119-sector demand (RM) */
+const MSIC_SECTOR = new Map(MSIC.map((m) => [m.code, m.sector]));
+export function demandFromEntries(entries: { msic: string; value: number }[]) {
+  const d = new Array(SECTOR_NAMES.length).fill(0);
+  for (const e of entries) {
+    const s = MSIC_SECTOR.get(e.msic);
+    if (s) d[s - 1] += e.value || 0;
+  }
+  return d as number[];
+}
+
+export type Linkage = {
+  sector: number;
+  name: string;
+  main: string;
+  bl: number; // backward linkage raw (column sum of Leontief inverse = output multiplier)
+  fl: number; // forward linkage raw (row sum)
+  blIdx: number; // normalised power of dispersion
+  flIdx: number; // normalised sensitivity of dispersion
+  type: "Sektor Utama" | "Rangkaian Ke Belakang" | "Rangkaian Ke Hadapan" | "Lemah";
+};
+
+/** Rasmussen linkages from the Leontief inverse (Backend IO C497:DQ615) */
+export const LINKAGES: Linkage[] = (() => {
+  const L = model.L as number[][];
+  const n = L.length;
+  const col = Array.from({ length: n }, (_, j) => L.reduce((a, r) => a + r[j]!, 0));
+  const row = L.map((r) => r.reduce((a, v) => a + v, 0));
+  const avg = col.reduce((a, v) => a + v, 0) / n; // = mean of row sums too
+  return SECTOR_NAMES.map((name, i) => {
+    const blIdx = col[i]! / avg;
+    const flIdx = row[i]! / avg;
+    const type =
+      blIdx > 1 && flIdx > 1 ? "Sektor Utama" : blIdx > 1 ? "Rangkaian Ke Belakang" : flIdx > 1 ? "Rangkaian Ke Hadapan" : "Lemah";
+    return { sector: i + 1, name, main: mainSectorOf(i + 1), bl: col[i]!, fl: row[i]!, blIdx, flIdx, type };
+  });
+})();
