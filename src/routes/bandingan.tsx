@@ -69,7 +69,7 @@ function Compare() {
     const vals = data.map((d) => d.t[k]);
     return k === "imports" ? Math.min(...vals) : Math.max(...vals);
   };
-  const chartData = data[0]?.sectors.map((s, i) => ({
+  const chartData = (data[0]?.sectors ?? []).map((s, i) => ({
     name: s.name,
     ...Object.fromEntries(data.map((d) => [d.name, d.sectors[i]![chartMetric]])),
   }));
