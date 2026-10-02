@@ -4,3 +4,5 @@
 - [x] Simulation → Input Calc → S LINK → 119-sector multipliers
 - [x] Simulation screen: bilingual MSIC search, editable amounts, review before calculating
 - [x] 119-industry ranking view
+- [ ] Scenario comparison view
+- [ ] Key sector ranking (backward/forward linkages)
