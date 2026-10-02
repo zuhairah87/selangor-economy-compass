@@ -22,7 +22,7 @@ const TYPE_COLOR: Record<Linkage["type"], string> = {
   "Sektor Utama": "var(--chart-2)",
   "Rangkaian Ke Belakang": "var(--chart-1)",
   "Rangkaian Ke Hadapan": "var(--chart-3)",
-  Lemah: "var(--muted-foreground)",
+  Lemah: "var(--destructive)",
 };
 const TYPE_DESC: Record<Linkage["type"], string> = {
   "Sektor Utama": "BL > 1 dan FL > 1",
